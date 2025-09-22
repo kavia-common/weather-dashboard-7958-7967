@@ -1,4 +1,4 @@
-//
+﻿//
 // Weather API service utilities for OpenWeatherMap (free tier)
 // Handles geocoding, current weather, and 7-day forecast via One Call API.
 //
@@ -7,7 +7,6 @@
 // - Uses metric units by default; can be extended for imperial.
 // - Free tier supports One Call 3.0 (limited), alternatively chain current + forecast endpoints.
 //
-
 const API_BASE = "https://api.openweathermap.org";
 const GEO_PATH = "/geo/1.0/direct";
 const REVERSE_GEO_PATH = "/geo/1.0/reverse";
@@ -15,7 +14,18 @@ const WEATHER_PATH = "/data/2.5/weather";
 const ONECALL_PATH = "/data/3.0/onecall"; // Prefer 3.0 if available on the environment
 const FORECAST_DAILY_FALLBACK = "/data/2.5/forecast"; // 3-hourly, used to derive daily if One Call is unavailable
 
-const API_KEY = process.env.REACT_APP_OPENWEATHER_API_KEY;
+/**
+ * PUBLIC_INTERFACE
+ * Returns the OpenWeatherMap API key at call time.
+ */
+export function getApiKey() {
+  /** Retrieve the API key from environment at call time, throwing if missing. */
+  const key = process.env.REACT_APP_OPENWEATHER_API_KEY;
+  if (!key) {
+    throw new Error("Missing REACT_APP_OPENWEATHER_API_KEY environment variable.");
+  }
+  return key;
+}
 
 /**
  * INTERNAL: Build URL with params
@@ -43,9 +53,7 @@ async function getJson(url) {
 // PUBLIC_INTERFACE
 export async function geocodeCity(query, limit = 5) {
   /** Geocode a city name to coordinates using OWM Direct Geocoding API. */
-  if (!API_KEY) {
-    throw new Error("Missing REACT_APP_OPENWEATHER_API_KEY environment variable.");
-  }
+  const API_KEY = getApiKey();
   const url = buildUrl(GEO_PATH, { q: query, limit, appid: API_KEY });
   return getJson(url);
 }
@@ -53,9 +61,7 @@ export async function geocodeCity(query, limit = 5) {
 // PUBLIC_INTERFACE
 export async function reverseGeocode(lat, lon, limit = 1) {
   /** Reverse geocode coordinates to a place name. */
-  if (!API_KEY) {
-    throw new Error("Missing REACT_APP_OPENWEATHER_API_KEY environment variable.");
-  }
+  const API_KEY = getApiKey();
   const url = buildUrl(REVERSE_GEO_PATH, { lat, lon, limit, appid: API_KEY });
   return getJson(url);
 }
@@ -63,9 +69,7 @@ export async function reverseGeocode(lat, lon, limit = 1) {
 // PUBLIC_INTERFACE
 export async function getCurrentWeatherByCoords(lat, lon, units = "metric") {
   /** Get current weather by coordinates. */
-  if (!API_KEY) {
-    throw new Error("Missing REACT_APP_OPENWEATHER_API_KEY environment variable.");
-  }
+  const API_KEY = getApiKey();
   const url = buildUrl(WEATHER_PATH, { lat, lon, units, appid: API_KEY });
   return getJson(url);
 }
@@ -73,9 +77,7 @@ export async function getCurrentWeatherByCoords(lat, lon, units = "metric") {
 // PUBLIC_INTERFACE
 export async function getCurrentWeatherByCity(city, units = "metric") {
   /** Get current weather by city name (uses weather endpoint). */
-  if (!API_KEY) {
-    throw new Error("Missing REACT_APP_OPENWEATHER_API_KEY environment variable.");
-  }
+  const API_KEY = getApiKey();
   const url = buildUrl(WEATHER_PATH, { q: city, units, appid: API_KEY });
   return getJson(url);
 }
@@ -84,6 +86,7 @@ export async function getCurrentWeatherByCity(city, units = "metric") {
  * Try One Call (3.0) first for daily; fall back to 3-hour forecast (2.5) aggregated to daily.
  */
 async function getDailyForecastFallback(lat, lon, units = "metric") {
+  const API_KEY = getApiKey();
   const url = buildUrl(FORECAST_DAILY_FALLBACK, { lat, lon, units, appid: API_KEY });
   const data = await getJson(url);
   // Aggregate 3-hourly list into day buckets (using simple min/max/avg)
@@ -131,9 +134,7 @@ export async function getSevenDayForecast(lat, lon, units = "metric") {
    * Get a 7-day forecast by coordinates.
    * Attempts One Call API 3.0; if unavailable, falls back to 3-hour forecast aggregation.
    */
-  if (!API_KEY) {
-    throw new Error("Missing REACT_APP_OPENWEATHER_API_KEY environment variable.");
-  }
+  const API_KEY = getApiKey();
 
   // Try One Call 3.0
   try {
