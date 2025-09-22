@@ -1,82 +1,38 @@
-# Lightweight React Template for KAVIA
+# Ocean Weather Dashboard (React)
 
-This project provides a minimal React template with a clean, modern UI and minimal dependencies.
+A modern, responsive weather dashboard that:
+- Uses free OpenWeatherMap APIs (current weather + 7-day forecast)
+- Auto-detects user location (via browser geolocation)
+- Allows search by city
+- Styled with the "Ocean Professional" theme (blue & amber accents)
 
-## Features
+No authentication is used anywhere in the app.
 
-- **Lightweight**: No heavy UI frameworks - uses only vanilla CSS and React
-- **Modern UI**: Clean, responsive design with KAVIA brand styling
-- **Fast**: Minimal dependencies for quick loading times
-- **Simple**: Easy to understand and modify
+## Quick Start
 
-## Getting Started
+1) Install dependencies
+   npm install
 
-In the project directory, you can run:
+2) Configure environment
+   - Copy .env.example to .env and set your OpenWeatherMap API key
+     REACT_APP_OPENWEATHER_API_KEY=your_key
 
-### `npm start`
+   Get a free key here: https://openweathermap.org/api
 
-Runs the app in development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+3) Run
+   npm start
 
-### `npm test`
+Open http://localhost:3000 to view.
 
-Launches the test runner in interactive watch mode.
+## Notes
 
-### `npm run build`
+- If geolocation is denied/unavailable, use the search bar to find a city.
+- Units can be toggled in the sidebar between Metric (°C) and Imperial (°F).
+- The app attempts One Call v3.0 for daily forecasts and falls back to an aggregated 3-hour forecast when necessary.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Tech
 
-## Customization
+- React 18
+- No UI frameworks (custom CSS)
+- Client-side fetch to OpenWeatherMap
 
-### Colors
-
-The main brand colors are defined as CSS variables in `src/App.css`:
-
-```css
-:root {
-  --kavia-orange: #E87A41;
-  --kavia-dark: #1A1A1A;
-  --text-color: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.7);
-  --border-color: rgba(255, 255, 255, 0.1);
-}
-```
-
-### Components
-
-This template uses pure HTML/CSS components instead of a UI framework. You can find component styles in `src/App.css`. 
-
-Common components include:
-- Buttons (`.btn`, `.btn-large`)
-- Container (`.container`)
-- Navigation (`.navbar`)
-- Typography (`.title`, `.subtitle`, `.description`)
-
-## Learn More
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

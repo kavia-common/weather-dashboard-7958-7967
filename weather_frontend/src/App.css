@@ -1,104 +1,342 @@
-/* CSS Variables for Theme Management */
+/* Ocean Professional Theme Styles */
+
 :root {
-  /* Light theme colors */
-  --bg-primary: #ffffff;
-  --bg-secondary: #f8f9fa;
-  --text-primary: #282c34;
-  --text-secondary: #61dafb;
-  --border-color: #e9ecef;
-  --button-bg: #007bff;
-  --button-text: #ffffff;
+  --ocean-primary: #2563EB; /* blue */
+  --ocean-amber: #F59E0B;   /* amber accent */
+  --ocean-bg: #f9fafb;      /* page background */
+  --ocean-surface: #ffffff; /* cards */
+  --ocean-text: #111827;    /* text */
+  --ocean-muted: #6B7280;   /* secondary text */
+  --ocean-border: rgba(0,0,0,0.08);
+  --ocean-shadow: 0 10px 25px rgba(0,0,0,0.08);
 }
 
-[data-theme="dark"] {
-  /* Dark theme colors */
-  --bg-primary: #1a1a1a;
-  --bg-secondary: #282c34;
-  --text-primary: #ffffff;
-  --text-secondary: #61dafb;
-  --border-color: #404040;
-  --button-bg: #0056b3;
-  --button-text: #ffffff;
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--ocean-bg);
+  color: var(--ocean-text);
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica Neue, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  line-height: 1.5;
 }
 
-.App {
-  text-align: center;
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
-  min-height: 100vh;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: var(--bg-secondary);
+.wf-app {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background-image: linear-gradient(135deg, rgba(37,99,235,0.08), rgba(255,255,255,0.7));
+}
+
+/* Header */
+.wf-header {
+  background: var(--ocean-primary);
+  color: white;
+  padding: 16px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: var(--ocean-shadow);
+}
+
+.wf-header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 16px;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: var(--text-primary);
-  transition: background-color 0.3s ease;
-  position: relative;
 }
 
-.App-link {
-  color: var(--text-secondary);
-  transition: color 0.3s ease;
+.wf-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
-.theme-toggle {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background-color: var(--button-bg);
-  color: var(--button-text);
+.wf-logo {
+  font-size: 28px;
+  filter: drop-shadow(0 2px 2px rgba(0,0,0,0.2));
+}
+
+.wf-title h1 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.wf-subtitle {
+  margin: 0;
+  font-size: 12px;
+  color: rgba(255,255,255,0.85);
+}
+
+.wf-search {
+  display: flex;
+  gap: 8px;
+}
+
+.wf-search input {
+  width: 260px;
+  max-width: 60vw;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.3);
+  outline: none;
+  background: rgba(255,255,255,0.95);
+  color: #0b1220;
+}
+
+.wf-search input::placeholder {
+  color: #6b7280;
+}
+
+.wf-search button {
+  background: var(--ocean-amber);
+  color: #1f2937;
   border: none;
-  border-radius: 8px;
-  padding: 10px 20px;
-  font-size: 14px;
+  border-radius: 10px;
+  padding: 10px 14px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform .06s ease, filter .15s ease;
+  box-shadow: 0 6px 14px rgba(245, 158, 11, 0.35);
 }
 
-.theme-toggle:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  opacity: 0.9;
+.wf-search button:hover { transform: translateY(-1px); filter: brightness(1.02); }
+.wf-search button:active { transform: translateY(0); }
+
+/* Layout */
+.wf-main {
+  flex: 1;
+  padding: 24px 16px 48px;
 }
 
-.theme-toggle:active {
-  transform: translateY(0);
+.wf-layout {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  gap: 24px;
+  grid-template-columns: 2fr 1fr;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.wf-left { display: grid; gap: 24px; }
+
+.wf-right {
+  min-width: 260px;
+}
+
+/* Cards */
+.wf-card {
+  background: var(--ocean-surface);
+  border: 1px solid var(--ocean-border);
+  border-radius: 16px;
+  box-shadow: var(--ocean-shadow);
+  padding: 16px;
+}
+
+/* Current Weather Card */
+.wf-current .wf-current-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.wf-current-location h2 {
+  margin: 0 0 2px 0;
+  font-size: 22px;
+}
+
+.wf-current-desc {
+  color: var(--ocean-muted);
+  font-size: 14px;
+}
+
+.wf-current-temp {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.wf-temp-value {
+  font-size: 44px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.wf-feels {
+  color: var(--ocean-muted);
+  font-size: 13px;
+}
+
+.wf-current-stats {
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: 12px;
+}
+
+.wf-stat {
+  background: linear-gradient(180deg, rgba(37,99,235,0.06), rgba(255,255,255,0.6));
+  border: 1px solid var(--ocean-border);
+  border-radius: 12px;
+  padding: 10px 12px;
+}
+
+.wf-stat-label {
+  font-size: 12px;
+  color: var(--ocean-muted);
+}
+
+.wf-stat-value {
+  display: block;
+  font-weight: 700;
+  margin-top: 4px;
+}
+
+/* Forecast */
+.wf-forecast h3 { margin: 0 0 12px 0; }
+
+.wf-forecast-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0,1fr));
+  gap: 12px;
+}
+
+.wf-forecast-day {
+  background: linear-gradient(180deg, rgba(37,99,235,0.05), rgba(255,255,255,0.7));
+  border: 1px solid var(--ocean-border);
+  border-radius: 12px;
+  padding: 10px;
+  text-align: center;
+}
+
+.wf-forecast-name {
+  font-size: 12px;
+  color: var(--ocean-muted);
+}
+
+.wf-forecast-icon {
+  width: 40px;
+  height: 40px;
+}
+
+.wf-forecast-temps {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  margin-top: 6px;
+  font-weight: 700;
+}
+
+.wf-forecast-max { color: var(--ocean-text); }
+.wf-forecast-min { color: var(--ocean-muted); }
+
+/* Sidebar */
+.wf-sidecard h3 { margin: 0 0 12px 0; }
+.wf-side-subtitle { margin: 16px 0 8px; color: var(--ocean-muted); }
+
+.wf-loc-block {
+  background: linear-gradient(90deg, rgba(37,99,235,0.07), rgba(255,255,255,0.7));
+  border: 1px solid var(--ocean-border);
+  border-radius: 12px;
+  padding: 10px 12px;
+}
+
+.wf-loc-title {
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.wf-loc-coords {
+  display: flex;
+  gap: 10px;
+  color: var(--ocean-muted);
+  font-size: 12px;
+}
+
+.wf-units {
+  display: flex;
+  gap: 8px;
+}
+
+.wf-chip {
+  border: 1px solid var(--ocean-border);
+  background: white;
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.wf-chip.active {
+  background: var(--ocean-amber);
+  color: #1f2937;
+  border-color: transparent;
+  box-shadow: 0 6px 14px rgba(245, 158, 11, 0.35);
+}
+
+.wf-smallnote {
+  margin-top: 12px;
+  color: var(--ocean-muted);
+  font-size: 12px;
+}
+
+/* Misc */
+.wf-error {
+  background: #FEF2F2;
+  color: #991B1B;
+  border: 1px solid #FECACA;
+  padding: 12px;
+  border-radius: 12px;
+}
+
+.wf-tip {
+  background: #EFF6FF;
+  color: #1E3A8A;
+  border: 1px solid #BFDBFE;
+  padding: 12px;
+  border-radius: 12px;
+}
+
+.wf-loading {
+  color: var(--ocean-muted);
+}
+
+/* Footer */
+.wf-footer {
+  text-align: center;
+  padding: 18px 12px 28px;
+  color: var(--ocean-muted);
+  font-size: 14px;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .wf-forecast-grid {
+    grid-template-columns: repeat(4, minmax(0,1fr));
   }
-  to {
-    transform: rotate(360deg);
-  }
 }
 
-/* Responsive design for mobile */
 @media (max-width: 768px) {
-  .theme-toggle {
-    top: 10px;
-    right: 10px;
-    padding: 8px 16px;
-    font-size: 12px;
+  .wf-header-inner {
+    grid-template-columns: 1fr;
+  }
+  .wf-layout {
+    grid-template-columns: 1fr;
+  }
+  .wf-right {
+    order: -1;
+  }
+  .wf-forecast-grid {
+    grid-template-columns: repeat(3, minmax(0,1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .wf-search input { width: 100%; }
+  .wf-forecast-grid {
+    grid-template-columns: repeat(2, minmax(0,1fr));
   }
 }
